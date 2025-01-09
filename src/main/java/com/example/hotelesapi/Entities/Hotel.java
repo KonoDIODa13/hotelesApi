@@ -1,4 +1,4 @@
-package com.example.hotelesapi.Entitys;
+package com.example.hotelesapi.Entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -16,12 +16,9 @@ CREATE TABLE Hotel
     localidad   varchar(50)  DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
  */
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "Hotel")
 public class Hotel {

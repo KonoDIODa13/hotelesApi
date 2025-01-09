@@ -1,4 +1,4 @@
-package com.example.hotelesapi.Entitys;
+package com.example.hotelesapi.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -46,4 +46,52 @@ public class Habitacion {
     @JsonBackReference
     private Hotel hotel;
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTamanno() {
+        return tamanno;
+    }
+
+    public void setTamanno(int tamanno) {
+        this.tamanno = tamanno;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public boolean isDesayuno() {
+        return desayuno;
+    }
+
+    public void setDesayuno(boolean desayuno) {
+        this.desayuno = desayuno;
+    }
+
+    public boolean isOcupada() {
+        return ocupada;
+    }
+
+    public void setOcupada(boolean ocupada) {
+        this.ocupada = ocupada;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
 }

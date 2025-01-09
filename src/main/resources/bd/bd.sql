@@ -15,18 +15,6 @@ CREATE TABLE Hotel
     localidad   varchar(50)  DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
-CREATE TABLE Habitacion
-(
-    id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    tamanno  int     DEFAULT 1,
-    precio   double  DEFAULT 100.00,
-    desayuno boolean DEFAULT FALSE,
-    ocupada  boolean DEFAULT FALSE,
-    hotel    int NOT NULL,
-    FOREIGN KEY (hotel) REFERENCES Hotel(id)
-
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
-
 INSERT INTO Hotel (nombre, descripcion, categoria, piscina, localidad)
 VALUES ('Castilla Vieja',
         'El Hotel Castilla Vieja, de cuatro estrellas, está situado en pleno centro neurálgico de la hermosa y sosegada ciudad de Palencia. Nos encontramos a 200 metros del Teatro Principal, a 2 minutos a pie de la Plaza Mayor y a 4 minutos de a la zona de compras por excelencia, la Calle Mayor.',
@@ -41,6 +29,17 @@ VALUES ('Castilla Vieja',
         'El Eurostars Madrid Tower, situado en las primeras 30 plantas de la imponente Torre SyV, es una verdadera joya arquitectónica que se eleva hasta los 236 metros sobre el cielo de Madrid. Su ubicación privilegiada ofrece una experiencia única que fusiona un servicio excepcional con elegancia y comodidad en el mismo corazón financiero de una de las ciudades más vibrantes de Europa.',
         5, TRUE, 'Madrid');
 
+CREATE TABLE Habitacion
+(
+    id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    tamanno  int     DEFAULT 1,
+    precio   double  DEFAULT 100.00,
+    desayuno boolean DEFAULT FALSE,
+    ocupada  boolean DEFAULT FALSE,
+    hotel    int NOT NULL,
+    FOREIGN KEY (hotel) REFERENCES Hotel(id)
+
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
 INSERT INTO Habitacion (tamanno, precio, desayuno, ocupada, hotel)
 VALUES (1, 50.00, TRUE, FALSE, 1),
