@@ -34,9 +34,14 @@ public class HabitacionController {
     @GetMapping("/{id}")
     public ResponseEntity<Habitacion> buscarHabitacionXID(@PathVariable int id) {
         try {
-            return ResponseEntity.of(habitacionService.BuscarHabitacionXID(id));
+            return ResponseEntity.of(habitacionService.buscarHabitacionXID(id));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error al obtener dicho hotel", e);
         }
+    }
+
+    @GetMapping("/filtrarXprecio/precio1/{precio1}/precio2/{precio2}")
+    public ResponseEntity<List<Habitacion>> filtrarHabitacionesXPrecio(@PathVariable double precio1, @PathVariable double precio2) {
+        return ResponseEntity.ok(habitacionService.filtrarHabitacionXPrecios(precio1, precio2));
     }
 }

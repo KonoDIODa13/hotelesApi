@@ -3,6 +3,7 @@ package com.example.hotelesapi.Entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SortComparator;
 
 /*
 CREATE TABLE Habitacion
@@ -20,7 +21,6 @@ CREATE TABLE Habitacion
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 @Table(name = "Habitacion")
 public class Habitacion {
