@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+
 /*
 CREATE TABLE Hotel
 (
@@ -45,7 +46,6 @@ public class Hotel {
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Habitacion> habitaciones;
-
 
 
     public int getId() {
@@ -102,5 +102,14 @@ public class Hotel {
 
     public void setHabitaciones(List<Habitacion> habitaciones) {
         this.habitaciones = habitaciones;
+    }
+
+    public void addHabitacion(Habitacion habitacion) {
+        habitaciones.add(habitacion);
+        habitacion.setHotel(this);
+    }
+
+    public void deleteHabitacion(Habitacion habitacion) {
+        habitaciones.remove(habitacion);
     }
 }

@@ -25,18 +25,11 @@ public class HabitacionServices {
     }
 
 
-    public List<Habitacion> filtrarHabitacionXTamannos(int tamanno1, int tamanno2) {
-        return (tamanno1 >= tamanno2) ?
-                buscarHabitacionesLibres().stream().filter(habitacion ->
-                        habitacion.getTamanno() >= tamanno2 && habitacion.getTamanno() < tamanno1).sorted().toList() :
-                buscarHabitacionesLibres().stream().filter(habitacion ->
-                        habitacion.getTamanno() >= tamanno1 && habitacion.getTamanno() < tamanno2).sorted().toList();
+    public List<Habitacion> filtrarHabitacionXTamanno(int tamanno) {
+        return buscarHabitacionesLibres().stream().filter(habitacion -> habitacion.getTamanno() == tamanno).toList();
     }
 
     public List<Habitacion> filtrarHabitacionXPrecios(double precio1, double precio2) {
-        List<Habitacion> habitaciones = buscarHabitacionesLibres().stream().filter(habitacion ->
-                habitacion.getPrecio() >= precio2 && habitacion.getPrecio() < precio1).toList();
-        System.out.println(habitaciones);
         return (precio1 >= precio2) ?
                 buscarHabitacionesLibres().stream().filter(habitacion ->
                         habitacion.getPrecio() >= precio2 && habitacion.getPrecio() < precio1).toList() :
@@ -48,5 +41,19 @@ public class HabitacionServices {
         return listarHabitaciones().stream().filter(habitacion -> !habitacion.isOcupada()).toList();
     }
 
+    public <S extends Habitacion> S save(S entity) {
+        return habitacionRepository.save(entity);
+    }
 
+    public void deleteById(Integer integer) {
+        habitacionRepository.deleteById(integer);
+    }
+
+    public void updateHabitacion(int id) {
+        if (buscarHabitacionXID(id).isPresent()) {
+            Habitacion habitacion = buscarHabitacionXID(id).get();
+            habitacion.setOcupada(true);
+            habitacionRepository.save(habitacion);
+        }
+    }
 }

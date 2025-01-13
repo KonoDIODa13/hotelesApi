@@ -1,13 +1,12 @@
 package com.example.hotelesapi.Controllers;
 
+import com.example.hotelesapi.Dtos.HabitacionDTO;
 import com.example.hotelesapi.Entities.Habitacion;
+import com.example.hotelesapi.Entities.Hotel;
 import com.example.hotelesapi.Services.HabitacionServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -44,4 +43,16 @@ public class HabitacionController {
     public ResponseEntity<List<Habitacion>> filtrarHabitacionesXPrecio(@PathVariable double precio1, @PathVariable double precio2) {
         return ResponseEntity.ok(habitacionService.filtrarHabitacionXPrecios(precio1, precio2));
     }
+
+    @GetMapping("/filtrarXtamanno/{tamanno}")
+    public ResponseEntity<List<Habitacion>> filtrarHabitacionesXTamanno(@PathVariable int tamanno) {
+        return ResponseEntity.ok(habitacionService.filtrarHabitacionXTamanno(tamanno));
+    }
+
+    @PutMapping("/{id}/ocupar")
+    public ResponseEntity<?> ocuparHabitacion(@PathVariable int id) {
+        habitacionService.updateHabitacion(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
 }
