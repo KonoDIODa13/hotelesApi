@@ -16,9 +16,9 @@ public class SwaggerConfig {
                 .info(new Info().title("HotelesAPI")
                         .description("API de Hoteles y Habitaciones")
                         .contact(new Contact()
-                                .name("Erik")
-                                .email("erik.amotoq@educa.jcyl.es")
-                                .url("https://github.com/ErikAT04"))
+                                .name("yo")
+                                .email("mibinding")
+                                .url("mimimimimi"))
                         .version("1.0"));
     }
 }

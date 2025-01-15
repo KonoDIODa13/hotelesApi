@@ -6,6 +6,7 @@ import com.example.hotelesapi.Repositorys.HabitacionRepository;
 import com.example.hotelesapi.Repositorys.HotelRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,6 @@ public class HotelService {
     }
 
     public Optional<Hotel> buscarHotelXID(int id) {
-        // return listarHoteles().stream().filter(hotel -> hotel.getId() == id).findFirst().orElse(null); en caso de que no fuera optional
         return listarHoteles().stream().filter(hotel -> hotel.getId() == id).findFirst();
     }
 
@@ -50,7 +50,8 @@ public class HotelService {
         return null;
     }
 
-    public void deleteHabitacion(int idHotel, int idHabitacion) {
+    public boolean deleteHabitacion(int idHotel, int idHabitacion) {
+        boolean borrado = false;
         if (hotelRepository.findById(idHotel).isPresent()) {
             Hotel hotel = hotelRepository.findById(idHotel).get();
             HabitacionServices habitacionServices = new HabitacionServices(habitacionRepository);
@@ -59,9 +60,11 @@ public class HotelService {
                 if (habitacion.getHotel() == hotel) {
                     hotel.deleteHabitacion(habitacion);
                     habitacionServices.deleteById(habitacion.getId());
+                    borrado = true;
                 }
             }
         }
+        return borrado;
     }
 
 }

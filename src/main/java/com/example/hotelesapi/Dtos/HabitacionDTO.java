@@ -1,20 +1,42 @@
 package com.example.hotelesapi.Dtos;
 
-/*
+import com.example.hotelesapi.Entities.Habitacion;
 
-    @Column(name = "tamanno")
-    private int tamanno;
+public record HabitacionDTO(int tamanno, double precio, boolean desayuno, boolean ocupada) {
 
-    @Column(name = "precio")
-    private double precio;
+    public Habitacion fromDTOToHabitacion() {
+        Habitacion habitacion = new Habitacion();
+        habitacion.setTamanno(tamanno);
+        habitacion.setPrecio(precio);
+        habitacion.setDesayuno(desayuno);
+        habitacion.setOcupada(ocupada);
+        return habitacion;
+    }
 
-    @Column(name = "desayuno")
-    private boolean desayuno;
+    public boolean compruebaCampos() {
+        boolean comprobado = true;
+        if (tamanno < 1 || tamanno >= 3) {
+            comprobado = false;
+        }
 
-    @Column(name = "ocupada")
-    private boolean ocupada;
+        if (precio <= 0.00) {
+            comprobado = false;
+        }
 
+        /*
+        no se como validar un bool xD
+        if (desayuno) {
+            comprobado = false;
+        }
+        */
 
- */
-public record HabitacionDTO(int tamano, double precio, boolean desayuno, boolean ocupada) {
+        /*
+        no se como validar un bool xD
+        if (ocupada) {
+            comprobado = false;
+        }
+        */
+        return comprobado;
+    }
+
 }

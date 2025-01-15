@@ -20,7 +20,6 @@ public class HabitacionServices {
     }
 
     public Optional<Habitacion> buscarHabitacionXID(int id) {
-        // return listarHabitaciones().stream().filter(hotel -> hotel.getId() == id).findFirst().orElse(null); en caso de que no fuera optional
         return listarHabitaciones().stream().filter(hotel -> hotel.getId() == id).findFirst();
     }
 
