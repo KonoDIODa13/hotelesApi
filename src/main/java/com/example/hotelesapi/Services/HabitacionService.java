@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class HabitacionServices {
+public class HabitacionService {
     private final HabitacionRepository habitacionRepository;
 
-    public HabitacionServices(HabitacionRepository habitacionRepository) {
+    public HabitacionService(HabitacionRepository habitacionRepository) {
         this.habitacionRepository = habitacionRepository;
     }
 

@@ -1,9 +1,7 @@
 package com.example.hotelesapi.Controllers;
 
-import com.example.hotelesapi.Dtos.HabitacionDTO;
 import com.example.hotelesapi.Entities.Habitacion;
-import com.example.hotelesapi.Entities.Hotel;
-import com.example.hotelesapi.Services.HabitacionServices;
+import com.example.hotelesapi.Services.HabitacionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +13,9 @@ import java.util.List;
 @RequestMapping("/api/habitacion")
 public class HabitacionController {
 
-    private final HabitacionServices habitacionService;
+    private final HabitacionService habitacionService;
 
-    public HabitacionController(HabitacionServices habitacionService) {
+    public HabitacionController(HabitacionService habitacionService) {
         this.habitacionService = habitacionService;
     }
 

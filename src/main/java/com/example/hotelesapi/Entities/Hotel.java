@@ -1,6 +1,5 @@
 package com.example.hotelesapi.Entities;
 
-import com.example.hotelesapi.Dtos.HotelDTO;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;

@@ -6,7 +6,6 @@ import com.example.hotelesapi.Repositorys.HabitacionRepository;
 import com.example.hotelesapi.Repositorys.HotelRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +53,7 @@ public class HotelService {
         boolean borrado = false;
         if (hotelRepository.findById(idHotel).isPresent()) {
             Hotel hotel = hotelRepository.findById(idHotel).get();
-            HabitacionServices habitacionServices = new HabitacionServices(habitacionRepository);
+            HabitacionService habitacionServices = new HabitacionService(habitacionRepository);
             if (habitacionServices.buscarHabitacionXID(idHabitacion).isPresent()) {
                 Habitacion habitacion = habitacionServices.buscarHabitacionXID(idHabitacion).get();
                 if (habitacion.getHotel() == hotel) {

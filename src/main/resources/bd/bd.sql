@@ -50,3 +50,15 @@ VALUES (1, 50.00, TRUE, FALSE, 1),
        (2, 150.00, TRUE, FALSE, 3),
        (1, 200.00, TRUE, FALSE, 4),
        (2, 250.00, TRUE, FALSE, 4);
+
+CREATE TABLE Usuario
+(
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR (20) DEFAULT NULL,
+    contrasenna VARCHAR (20) DEFAULT NULL,
+    token VARCHAR (300) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
+
+INSERT INTO Usuario (nombre, contrasenna)
+VALUES ("juan", "juan"),
+        ("jaime", "123456");
