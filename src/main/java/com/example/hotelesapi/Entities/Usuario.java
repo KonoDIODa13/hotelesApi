@@ -1,6 +1,6 @@
 package com.example.hotelesapi.Entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor

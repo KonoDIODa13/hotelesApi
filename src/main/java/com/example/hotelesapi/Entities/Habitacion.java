@@ -2,7 +2,7 @@ package com.example.hotelesapi.Entities;
 
 import com.example.hotelesapi.Dtos.HabitacionDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SortComparator;
 
