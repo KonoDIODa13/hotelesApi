@@ -41,8 +41,19 @@ public class HotelesApiApplication {
                     .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/user").permitAll()//antMatchers OBSOLETO
-                    .antMatchers("/api/habitacion/espacio/**").permitAll() // Libre acceso a espacio
-                    .antMatchers("/api/habitacion/precio/**").permitAll()
+
+                    //dejo acceso a ver que datos hay en bd
+                    .antMatchers("/api/hotel/").permitAll()
+                    .antMatchers("/api/habitacion/").permitAll()
+                    .antMatchers("/api/hotel/{id}").permitAll()
+                    .antMatchers("/api/habitacion/{id}").permitAll()
+                    .antMatchers("/api/hotel/filtrar/**").permitAll()
+                    .antMatchers("/api/habitacion/filtrar/**").permitAll()
+                    // permito solo a los que este autenticados.
+                    .antMatchers(HttpMethod.POST,"/api/hotel/annadirHotel").authenticated()
+                    .antMatchers(HttpMethod.POST,"/api/hotel/{id}/**").authenticated()
+                    .antMatchers(HttpMethod.PUT, "/api/habitacion/{id}/**").authenticated()
+                    .antMatchers(HttpMethod.DELETE, "/api/hotel/{id}/**").authenticated()
                     .antMatchers(AUTH_WHITELIST).permitAll() //SWAGGER
                     .anyRequest().authenticated();//cualquier solicitud debe ser autenticada, de lo contrario, mi aplicación Spring devolverá una respuesta 401.
         }

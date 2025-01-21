@@ -16,11 +16,11 @@ public record HotelDTO(String nombre, String descripcion, int categoria, boolean
 
     public boolean compruebaCampos() {
         boolean comprobado = true;
-        if (nombre == null) {
+        if (nombre.isEmpty()) {
             comprobado = false;
         }
 
-        if (descripcion == null) {
+        if (descripcion.isEmpty()) {
             comprobado = false;
         }
 
@@ -35,7 +35,7 @@ public record HotelDTO(String nombre, String descripcion, int categoria, boolean
         }
         */
 
-        if (localidad == null) {
+        if (localidad.isEmpty()) {
             comprobado = false;
         }
         return comprobado;

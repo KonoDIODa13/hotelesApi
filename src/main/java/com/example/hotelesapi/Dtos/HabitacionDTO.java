@@ -15,7 +15,7 @@ public record HabitacionDTO(int tamanno, double precio, boolean desayuno, boolea
 
     public boolean compruebaCampos() {
         boolean comprobado = true;
-        if (tamanno < 1 || tamanno >= 3) {
+        if (tamanno <= 0 || tamanno >= 3) {
             comprobado = false;
         }
 

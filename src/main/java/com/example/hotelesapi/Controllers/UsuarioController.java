@@ -23,7 +23,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping("user")
+    @PostMapping("/user")
 
     // public User login(  @PathVariable String username,@PathVariable String pwd)
     public Usuario login(@RequestParam("nombre") String username, @RequestParam("contrasenna") String pwd) {

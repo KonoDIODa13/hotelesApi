@@ -37,12 +37,12 @@ public class HabitacionController {
         }
     }
 
-    @GetMapping("/filtrarXprecio/precio1/{precio1}/precio2/{precio2}")
+    @GetMapping("/filtrar/precio/{precio1},{precio2}")
     public ResponseEntity<List<Habitacion>> filtrarHabitacionesXPrecio(@PathVariable double precio1, @PathVariable double precio2) {
         return ResponseEntity.ok(habitacionService.filtrarHabitacionXPrecios(precio1, precio2));
     }
 
-    @GetMapping("/filtrarXtamanno/{tamanno}")
+    @GetMapping("/filtrar/tamanno/{tamanno}")
     public ResponseEntity<List<Habitacion>> filtrarHabitacionesXTamanno(@PathVariable int tamanno) {
         return ResponseEntity.ok(habitacionService.filtrarHabitacionXTamanno(tamanno));
     }
