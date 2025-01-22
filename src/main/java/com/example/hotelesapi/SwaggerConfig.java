@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfig {
+    // URL SWAGER: http://localhost:9999/doc/swagger-ui/index.html
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
@@ -16,9 +17,9 @@ public class SwaggerConfig {
                 .info(new Info().title("HotelesAPI")
                         .description("API de Hoteles y Habitaciones")
                         .contact(new Contact()
-                                .name("yo")
-                                .email("mibinding")
-                                .url("mimimimimi"))
+                                .name("Jaime González Bravo")
+                                .email("jaime.gonbra@educa.jcyl.es")
+                                .url("hotelesApi"))
                         .version("1.0"));
     }
 }

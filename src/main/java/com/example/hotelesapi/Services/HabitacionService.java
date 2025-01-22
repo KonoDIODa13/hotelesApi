@@ -28,12 +28,9 @@ public class HabitacionService {
         return buscarHabitacionesLibres().stream().filter(habitacion -> habitacion.getTamanno() == tamanno).toList();
     }
 
-    public List<Habitacion> filtrarHabitacionXPrecios(double precio1, double precio2) {
-        return (precio1 >= precio2) ?
-                buscarHabitacionesLibres().stream().filter(habitacion ->
-                        habitacion.getPrecio() >= precio2 && habitacion.getPrecio() < precio1).toList() :
-                buscarHabitacionesLibres().stream().filter(habitacion ->
-                        habitacion.getPrecio() >= precio1 && habitacion.getPrecio() < precio2).toList();
+    public List<Habitacion> filtrarHabitacionXPrecios(double precioMenor, double precioMayor) {
+        return buscarHabitacionesLibres().stream().filter(habitacion ->
+                habitacion.getPrecio() >= precioMenor && habitacion.getPrecio() < precioMayor).toList();
     }
 
     private List<Habitacion> buscarHabitacionesLibres() {
@@ -48,11 +45,15 @@ public class HabitacionService {
         habitacionRepository.deleteById(integer);
     }
 
-    public void updateHabitacion(int id) {
-        if (buscarHabitacionXID(id).isPresent()) {
-            Habitacion habitacion = buscarHabitacionXID(id).get();
+    public boolean updateHabitacion(Habitacion habitacion) {
+        boolean modificado;
+        if (habitacion.isOcupada()) {
+            modificado = false;
+        } else {
             habitacion.setOcupada(true);
             habitacionRepository.save(habitacion);
+            modificado = true;
         }
+        return modificado;
     }
 }

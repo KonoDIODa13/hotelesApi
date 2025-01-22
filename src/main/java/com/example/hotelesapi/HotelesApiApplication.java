@@ -49,6 +49,12 @@ public class HotelesApiApplication {
                     .antMatchers("/api/habitacion/{id}").permitAll()
                     .antMatchers("/api/hotel/filtrar/**").permitAll()
                     .antMatchers("/api/habitacion/filtrar/**").permitAll()
+
+                    /*
+                    esto funcionaria si no tuviera al final lo de .anyRequest().authenticated();
+                     .antMatchers(HttpMethod.GET, "/api/**").permitAll()
+                     */
+
                     // permito solo a los que este autenticados.
                     .antMatchers(HttpMethod.POST,"/api/hotel/annadirHotel").authenticated()
                     .antMatchers(HttpMethod.POST,"/api/hotel/{id}/**").authenticated()

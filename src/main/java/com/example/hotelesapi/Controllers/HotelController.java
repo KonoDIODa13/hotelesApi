@@ -2,13 +2,11 @@ package com.example.hotelesapi.Controllers;
 
 import com.example.hotelesapi.Dtos.HabitacionDTO;
 import com.example.hotelesapi.Dtos.HotelDTO;
-import com.example.hotelesapi.Entities.Habitacion;
 import com.example.hotelesapi.Entities.Hotel;
 import com.example.hotelesapi.Services.HotelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +23,7 @@ public class HotelController {
     @GetMapping("/")
     public ResponseEntity<?> listarHoteles() {
         List<Hotel> listaHotel = hotelService.listarHoteles();
-        return listaHotel.size() != 0 ?
+        return !listaHotel.isEmpty() ?
                 new ResponseEntity<List<Hotel>>(listaHotel, HttpStatus.ACCEPTED) :
                 new ResponseEntity<String>("No se ha podido encontrar ningun hotel ", HttpStatus.BAD_REQUEST);
     }
@@ -42,7 +40,7 @@ public class HotelController {
     @GetMapping("/filtrar/categoria/{categoria}")
     public ResponseEntity<?> filtrarXCategoria(@PathVariable int categoria) {
         List<Hotel> listaHotel = hotelService.filtrarXCategoria(categoria);
-        return listaHotel.size() != 0 ?
+        return !listaHotel.isEmpty() ?
                 new ResponseEntity<List<Hotel>>(listaHotel, HttpStatus.ACCEPTED) :
                 new ResponseEntity<String>("No se ha podido encontrar ningun hotel cuya categoria sea " + categoria, HttpStatus.BAD_REQUEST);
     }
@@ -57,7 +55,6 @@ public class HotelController {
 
     @PostMapping("/annadirHotel")
     public ResponseEntity<?> insertarHotel(@RequestBody HotelDTO hotelDTO) {
-        System.out.println(hotelDTO.compruebaCampos());
         return  hotelDTO.compruebaCampos() ?
                 new ResponseEntity<Hotel>(hotelService.guardarHotel(hotelDTO.fromDToToHotel()), HttpStatus.CREATED) :
                 new ResponseEntity<String>("No se ha podido guardar el hotel", HttpStatus.BAD_REQUEST);
@@ -65,7 +62,6 @@ public class HotelController {
 
     @PostMapping("/{id}/annadirHabitacion")
     public ResponseEntity<?> guardarHabitacion(@PathVariable int id, @RequestBody HabitacionDTO habitacionDTO) {
-        System.out.println(habitacionDTO.compruebaCampos());
         return habitacionDTO.compruebaCampos() ?
                 new ResponseEntity<Hotel>(hotelService.addHabitacion(id, habitacionDTO.fromDTOToHabitacion()), HttpStatus.CREATED) :
                 new ResponseEntity<String>("No se ha podido guardar la habitacion en el hotel", HttpStatus.BAD_REQUEST);
@@ -73,8 +69,6 @@ public class HotelController {
 
     @DeleteMapping("/{idHotel}/habitacion/{idHabitacion}/eliminarHabitacion")
     public ResponseEntity<?> eliminarHabitacion(@PathVariable int idHotel, @PathVariable int idHabitacion) {
-        /*hotelService.deleteHabitacion(idHotel, idHabitacion);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);*/
         return hotelService.deleteHabitacion(idHotel, idHabitacion) ?
                 new ResponseEntity<Hotel>(hotelService.buscarHotelXID(idHotel).get(), HttpStatus.ACCEPTED) :
                 new ResponseEntity<String>("No se ha podido borrar la habitacion del hotel", HttpStatus.BAD_REQUEST);
