@@ -34,9 +34,9 @@ public class HabitacionService {
         De esta forma, se realizaria lo mismo que la respuesta pero utilizando las querys.
         En mi caso lo dejo comentado porque me gusta más a mi manera.
         Si quieres probar que funciona, solo tienes que descomentarlo y comentar lo otro.
-        */
         return habitacionRepository.getHabitacionById(id);
-        //return listarHabitaciones().stream().filter(hotel -> hotel.getId() == id).findFirst();
+        */
+        return listarHabitaciones().stream().filter(hotel -> hotel.getId() == id).findFirst();
     }
 
 
@@ -50,9 +50,9 @@ public class HabitacionService {
         De esta forma, se realizaria lo mismo que la respuesta pero utilizando las querys.
         En mi caso lo dejo comentado porque me gusta más a mi manera.
         Si quieres probar que funciona, solo tienes que descomentarlo y comentar lo otro.
-        */
         return habitacionRepository.getHabitacionsByTamanno(tamanno);
-        //return buscarHabitacionesLibres().stream().filter(habitacion -> habitacion.getTamanno() == tamanno).toList();
+        */
+        return buscarHabitacionesLibres().stream().filter(habitacion -> habitacion.getTamanno() == tamanno).toList();
     }
 
     public List<Habitacion> filtrarHabitacionXPrecios(double precioMenor, double precioMayor) {
@@ -62,15 +62,15 @@ public class HabitacionService {
         los precios establecidos (gracias a la comprobacion que hacemos antes, sé cual es el precio menor y el mayor)
         y lo devuelvo en una lista.
         */
-         /*
+        /*
         De esta forma, se realizaria lo mismo que la respuesta pero utilizando las querys.
         En mi caso lo dejo comentado porque me gusta más a mi manera.
         Si quieres probar que funciona, solo tienes que descomentarlo y comentar lo otro.
+        return habitacionRepository.getHabitacionsByPrecioBetween(precioMenor, precioMayor);
         */
-        return habitacionRepository.getHabitacionsByPrecioBetween(precioMenor,precioMayor);
-        /*return buscarHabitacionesLibres().stream().filter(habitacion ->
+        return buscarHabitacionesLibres().stream().filter(habitacion ->
                 habitacion.getPrecio() >= precioMenor && habitacion.getPrecio() < precioMayor).toList();
-           */
+
     }
 
     public <S extends Habitacion> S save(S entity) {
@@ -112,6 +112,12 @@ public class HabitacionService {
         para ello, recorro todas las habitaciones con stream y filtro si el atributo de ocupada
         es false, si es asi, las mete en una lista que terminará devolviendo.
         */
+        /*
+        De esta forma, se realizaria lo mismo que la respuesta pero utilizando las querys.
+        En mi caso lo dejo comentado porque me gusta más a mi manera.
+        Si quieres probar que funciona, solo tienes que descomentarlo y comentar lo otro.
+        */
+        //return habitacionRepository.getHabitacionsFree();
         return listarHabitaciones().stream().filter(habitacion -> !habitacion.isOcupada()).toList();
     }
 }

@@ -17,4 +17,7 @@ public interface HabitacionRepository extends JpaRepository<Habitacion, Integer>
 
     @Query("SELECT h FROM Habitacion h WHERE h.id=:id")
     public Optional<Habitacion> getHabitacionById(int id);
+
+    @Query("SELECT h FROM Habitacion h WHERE h.ocupada=false")
+    public List<Habitacion> getHabitacionsFree();
 }
