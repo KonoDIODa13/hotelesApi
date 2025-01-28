@@ -56,10 +56,11 @@ public class HotelesApiApplication {
                      */
 
                     // permito solo a los que este autenticados.
-                    .antMatchers(HttpMethod.POST,"/api/hotel/annadirHotel").authenticated()
+                    /*.antMatchers(HttpMethod.POST,"/api/hotel/annadirHotel").authenticated()
                     .antMatchers(HttpMethod.POST,"/api/hotel/{id}/**").authenticated()
                     .antMatchers(HttpMethod.PUT, "/api/habitacion/{id}/**").authenticated()
-                    .antMatchers(HttpMethod.DELETE, "/api/hotel/{id}/**").authenticated()
+                    .antMatchers(HttpMethod.DELETE, "/api/hotel/{id}/**").authenticated()*/
+                    // no se porque da esto error osea es porque son doble mente autenticated? xD
                     .antMatchers(AUTH_WHITELIST).permitAll() //SWAGGER
                     .anyRequest().authenticated();//cualquier solicitud debe ser autenticada, de lo contrario, mi aplicación Spring devolverá una respuesta 401.
         }
