@@ -33,6 +33,13 @@ public class HotelService {
         busco la primera habitación de la lista por el id,
         si existe, me devolverá un hotel.
         */
+
+        /*
+        De esta forma, se realizaria lo mismo que la respuesta pero utilizando las querys.
+        En mi caso lo dejo comentado porque me gusta más a mi manera.
+        Si quieres probar que funciona, solo tienes que descomentarlo y comentar lo otro.
+        return hotelRepository.getHotelById(id);
+        */
         return listarHoteles().stream().filter(hotel -> hotel.getId() == id).findFirst();
     }
 
@@ -43,6 +50,13 @@ public class HotelService {
         busco si hay algun hotel con dicha categoria,
         si existe, lo devolveré en forma de lista.
         */
+
+        /*
+        De esta forma, se realizaria lo mismo que la respuesta pero utilizando las querys.
+        En mi caso lo dejo comentado porque me gusta más a mi manera.
+        Si quieres probar que funciona, solo tienes que descomentarlo y comentar lo otro.
+        return hotelRepository.getHotelsByCategoria(categoria);
+        */
         return listarHoteles().stream().filter(hotel -> hotel.getCategoria() == categoria).toList();
     }
 
@@ -52,6 +66,13 @@ public class HotelService {
         Recorro la lista de hoteles mediante stream,
         busco si hay algun hotel con dicha categoria,
         si existe, lo devolveré en forma de lista.
+        */
+
+        /*
+        De esta forma, se realizaria lo mismo que la respuesta pero utilizando las querys.
+        En mi caso lo dejo comentado porque me gusta más a mi manera.
+        Si quieres probar que funciona, solo tienes que descomentarlo y comentar lo otro.
+        return hotelRepository.getHotelsByLocalidad(localidad);
         */
         return listarHoteles().stream().filter(hotel -> hotel.getLocalidad().equalsIgnoreCase(localidad)).toList();
     }

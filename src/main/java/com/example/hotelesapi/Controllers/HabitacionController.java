@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/habitacion")
+@RequestMapping( "/api/habitacion")
 public class HabitacionController {
 
     private final HabitacionService habitacionService;
@@ -23,6 +23,7 @@ public class HabitacionController {
 
     @GetMapping("/")
     public ResponseEntity<?> listarHabitaciones() {
+        // Listar todas las habitaciones de la bd en una lista.
         List<Habitacion> listaHabitacion = habitacionService.listarHabitaciones();
         // Recogo todas las habitaciones de la bd en una lista.
         return !listaHabitacion.isEmpty() ?
@@ -32,6 +33,7 @@ public class HabitacionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarHabitacionXID(@PathVariable int id) {
+        // Buscar una habitación cuyo id sea ese.
         Optional<Habitacion> habitacion = habitacionService.buscarHabitacionXID(id);
         // Si existe habitación, devolveré dicha habitación.
         return habitacion.isPresent() ?
@@ -41,6 +43,7 @@ public class HabitacionController {
 
     @GetMapping("/filtrar/precio/{precio1},{precio2}")
     public ResponseEntity<?> filtrarHabitacionesXPrecio(@PathVariable double precio1, @PathVariable double precio2) {
+        // Buscar habitaciones que estén entre los precios dados.
         double precioMayor;
         double precioMenor;
         // Compruebo cual de los dos es mayor.
@@ -64,7 +67,10 @@ public class HabitacionController {
 
     @GetMapping("/filtrar/tamanno/{tamanno}")
     public ResponseEntity<?> filtrarHabitacionesXTamanno(@PathVariable int tamanno) {
+        // Buscar habitaciones según el tamaño dado.
         List<Habitacion> listaHabitacion = habitacionService.filtrarHabitacionXTamanno(tamanno);
+        // Si no encuentra habitaciones con ese tamaño mostrará un mensaje de error.
+        // en caso contrario, mostrará una lista con las habitaciones que tengan dicho tamaño.
         return !listaHabitacion.isEmpty() ?
                 new ResponseEntity<List<Habitacion>>(listaHabitacion, HttpStatus.ACCEPTED) :
                 new ResponseEntity<String>("No se ha podido encontrar habitaciones cuyo tamaño sea " + tamanno, HttpStatus.BAD_REQUEST);
@@ -73,8 +79,12 @@ public class HabitacionController {
 
     @PutMapping("/{id}/ocupar")
     public ResponseEntity<?> ocuparHabitacion(@PathVariable int id) {
+        // Ocupar una habitación según el id de la misma.
+        // Primero, me encargo de buscar si existe la habitación.
         Optional<Habitacion> habitacionOptional = habitacionService.buscarHabitacionXID(id);
         if (habitacionOptional.isPresent()) {
+            // Si existe y la habitacion no está ocupada, la modifica.
+            // en caso contrario dice que ya esta ocupada por lo que no puede ocuparla.
             Habitacion habitacion = habitacionOptional.get();
             return habitacionService.updateHabitacion(habitacion) ?
                     new ResponseEntity<Habitacion>(habitacion, HttpStatus.ACCEPTED) :
