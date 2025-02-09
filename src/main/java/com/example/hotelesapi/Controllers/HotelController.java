@@ -4,28 +4,47 @@ import com.example.hotelesapi.Dtos.HabitacionDTO;
 import com.example.hotelesapi.Dtos.HotelDTO;
 import com.example.hotelesapi.Entities.Hotel;
 import com.example.hotelesapi.Services.HotelService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/hotel")
+@Tag(name = "Hoteles", description = "Controlador con todas las acciones de los hoteles.")
 public class HotelController {
-    private final HotelService hotelService;
-
-    public HotelController(HotelService hotelService) {
-        this.hotelService = hotelService;
-    }
+    @Autowired
+    private HotelService hotelService;
 
     @GetMapping("/")
+    @Operation(summary = "listar todos los hoteles de la bd")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Mostrará correctamente la lista con los hoteles",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Hotel.class)))
+            ),
+            @ApiResponse(responseCode = "403",
+                    description = "el usuario esta authenticado y no deberia", content = @Content(schema = @Schema(implementation = String.class))
+            ),
+            @ApiResponse(responseCode = "400", description = "No se ha puesto campo a buscar")
+    })
     public ResponseEntity<?> listarHoteles() {
-        List<Hotel> listaHotel = hotelService.listarHoteles();
-        return !listaHotel.isEmpty() ?
-                new ResponseEntity<List<Hotel>>(listaHotel, HttpStatus.ACCEPTED) :
-                new ResponseEntity<String>("No se ha podido encontrar ningun hotel ", HttpStatus.BAD_REQUEST);
+        try {
+            return new ResponseEntity<List<Hotel>>(hotelService.listarHoteles(), HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "error de busqueda", e);
+        }
     }
 
     @GetMapping("/{id}")
@@ -55,7 +74,7 @@ public class HotelController {
 
     @PostMapping("/annadirHotel")
     public ResponseEntity<?> insertarHotel(@RequestBody HotelDTO hotelDTO) {
-        return  hotelDTO.compruebaCampos() ?
+        return hotelDTO.compruebaCampos() ?
                 new ResponseEntity<Hotel>(hotelService.guardarHotel(hotelDTO.fromDToToHotel()), HttpStatus.CREATED) :
                 new ResponseEntity<String>("No se ha podido guardar el hotel", HttpStatus.BAD_REQUEST);
     }

@@ -4,6 +4,7 @@ import com.example.hotelesapi.Entities.Habitacion;
 import com.example.hotelesapi.Entities.Hotel;
 import com.example.hotelesapi.Repositorys.HabitacionRepository;
 import com.example.hotelesapi.Repositorys.HotelRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,13 +12,11 @@ import java.util.Optional;
 
 @Service
 public class HotelService {
-    private final HotelRepository hotelRepository;
-    private final HabitacionRepository habitacionRepository;
+    @Autowired
+    private HotelRepository hotelRepository;
+    @Autowired
+    private HabitacionRepository habitacionRepository;
 
-    public HotelService(HotelRepository hotelRepository, HabitacionRepository habitacionRepository) {
-        this.hotelRepository = hotelRepository;
-        this.habitacionRepository = habitacionRepository;
-    }
 
     public List<Hotel> listarHoteles() {
         /*
