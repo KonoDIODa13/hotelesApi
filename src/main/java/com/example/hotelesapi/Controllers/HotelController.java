@@ -41,6 +41,7 @@ public class HotelController {
     })
     public ResponseEntity<?> listarHoteles() {
         try {
+            //aaaaaaaaaaaaaaaaaaaaaaa
             return new ResponseEntity<List<Hotel>>(hotelService.listarHoteles(), HttpStatus.ACCEPTED);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "error de busqueda", e);
